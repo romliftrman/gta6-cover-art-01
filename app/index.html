@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neon Shore Cover Studio — 9-panel cover maker, 9 grades, 3 PNG sizes</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<main class="app">
+  <section class="controls" aria-label="Cover editor controls">
+    <h1>Neon Shore Cover Studio</h1>
+    <p class="tagline">Your photos + a caption, made into GTA-style cover art. 9 panels, 9 neon grades, 3 post sizes — in 3 steps.</p>
+    <ol class="steps">
+      <li><strong>1 · Add photos</strong> — drop them on the cover, paste, or pick files.</li>
+      <li><strong>2 · Caption</strong> — title, subtitle and caption, then pick a layout and grade.</li>
+      <li><strong>3 · Export PNG</strong> — square, portrait or wide, straight to your downloads.</li>
+    </ol>
+
+    <label class="field">Photos
+      <input id="photoFile" type="file" accept="image/*" multiple>
+      <span class="hint">Drop files on the cover or paste (Ctrl+V). 2 samples are loaded already.</span>
+    </label>
+
+    <label class="field">Title
+      <input id="title" type="text" maxlength="18" value="NEON SHORE">
+    </label>
+    <label class="field">Subtitle
+      <input id="subtitle" type="text" maxlength="40" value="sunset · palms · neon">
+    </label>
+    <label class="field">Caption
+      <input id="caption" type="text" maxlength="90" value="Golden hour on the boulevard — my cover, my photos.">
+    </label>
+
+    <fieldset class="field">
+      <legend>Layout</legend>
+      <div id="layouts" class="chips"></div>
+    </fieldset>
+
+    <fieldset class="field">
+      <legend>Grade</legend>
+      <label class="inline">Apply to
+        <select id="gradeScope">
+          <option value="all">whole cover</option>
+          <option value="panel">selected panel</option>
+        </select>
+      </label>
+      <div id="grades" class="swatches"></div>
+    </fieldset>
+
+    <fieldset class="field">
+      <legend>Selected panel — click the cover, drag to crop</legend>
+      <p id="panelLabel" class="panel-label">Panel 1 — loading…</p>
+      <label class="inline">Photo
+        <select id="panelPhoto"></select>
+      </label>
+      <label class="inline">Panel grade
+        <select id="panelGrade"></select>
+      </label>
+      <label class="inline">Zoom
+        <input id="zoom" type="range" min="0" max="500" value="130">
+      </label>
+      <p class="hint">Drag the photo to pan it · scroll to zoom · arrow keys nudge · Shift + arrows nudge more.</p>
+    </fieldset>
+
+    <div class="row">
+      <button id="undo" type="button">Undo</button>
+      <button id="redo" type="button">Redo</button>
+      <button id="shuffle" type="button">Shuffle panels</button>
+      <button id="reset" type="button">Reset</button>
+    </div>
+
+    <fieldset class="field">
+      <legend>Export PNG</legend>
+      <label class="inline">Size
+        <select id="exportSize"></select>
+      </label>
+      <div class="row">
+        <button id="export" type="button" class="primary">Export PNG</button>
+        <button id="exportAll" type="button">Export all 3 sizes</button>
+      </div>
+      <p class="hint">Preview size:
+        <span id="previewSizes" class="chips"></span>
+      </p>
+    </fieldset>
+
+    <p id="status" role="status"></p>
+    <p id="audit" class="audit"></p>
+    <p class="privacy">Photos never leave this device — no uploads, no account, no watermark.</p>
+  </section>
+  <section class="stage" aria-label="Cover preview">
+    <canvas id="cover" width="1080" height="1080" tabindex="0" aria-label="The cover — click a panel to select it, drag to crop"></canvas>
+  </section>
+</main>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
